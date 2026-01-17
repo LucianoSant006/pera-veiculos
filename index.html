@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERA Veículos | Veículos Premium e Blindagem</title>
+    <meta name="description" content="24 anos de experiência em veículos premium, blindagem e assessoria automotiva. Encontre o carro dos seus sonhos!">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Principal -->
+    <style>
+        /* ===== VARIÁVEIS DE COR - PERA VEÍCULOS ===== */
+        :root {
+            /* Paleta Oficial PERA Veículos */
+            --preto: #3B3B39;
+            --branco: #FCFBFB;
+            --cinza-claro: #6a6a6a;
+            --cinza-medio: #535353;
+            
+            /* Cores para blindagem baseadas na nova paleta */
+            --blindagem-nivel1: #3e3a3e;
+            --blindagem-nivel2: #797979;
+            --blindagem-nivel3: #3B3B39;
+            --blindagem-nivel4: #2A2A2A;
+            
+            /* Sombras */
+            --shadow-sm: 0 2px 10px rgba(59, 59, 57, 0.1);
+            --shadow-md: 0 5px 20px rgba(59, 59, 57, 0.15);
+            --shadow-lg: 0 10px 30px rgba(59, 59, 57, 0.2);
+            --shadow-destaque: 0 0 15px rgba(76, 72, 75, 0.4);
+            
+            /* Transições */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            /* Bordas */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 30px;
+        }
+
+        /* ===== RESET E CONFIGURAÇÕES GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--branco);
+            color: var(--preto);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== LOADER ===== */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--branco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            margin-bottom: 30px;
+        }
+
+        .loader-logo h1 {
+            font-size: 5rem;
+            color: var(--preto);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(149, 120, 142, 0.5);
+        }
+
+        .loader-logo span {
+            color: var(--cinza-medio);
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(59, 59, 57, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--cinza-medio);
+            width: 0%;
+            animation: loading 2s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ===== LOGO ===== */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img-container {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .main {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--preto);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.7rem;
+            color: var(--cinza-medio);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background-color: var(--branco);
+            padding: 20px 0;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--cinza-claro);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+        }
+
+        .nav-link {
+            color: var(--preto) !important;
+            font-weight: 500;
+            margin: 0 5px;
+            padding: 8px 16px !important;
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--cinza-medio) !important;
+            background-color: rgba(149, 120, 142, 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--cinza-medio);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-link.active::after {
+            width: 20px;
+        }
+
+        .btn-whatsapp-nav {
+            background-color: var(--cinza-medio);
+            color: var(--branco) !important;
+            border-radius: var(--border-radius-xl);
+            padding: 10px 24px !important;
+            font-weight: 600;
+            transition: all var(--transition-normal);
+            border: none;
+        }
+
+        .btn-whatsapp-nav:hover {
+            background-color: var(--preto);
+            transform: translateY(-2px);
+        }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--cinza-medio);
+            color: var(--branco);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            overflow: hidden;
+        }
+
+        .whatsapp-float:hover {
+            background-color: var(--preto);
+            transform: scale(1.1);
+            width: 180px;
+            border-radius: var(--border-radius-xl);
+        }
+
+        .whatsapp-text {
+            font-size: 0;
+            opacity: 0;
+            transition: all var(--transition-normal);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .whatsapp-float:hover .whatsapp-text {
+            font-size: 14px;
+            opacity: 1;
+        }
+
+        .whatsapp-float:hover i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            margin-top: 76px;
+            overflow: hidden;
+        }
+
+        .hero-swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100%;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(252, 251, 251, 0.9) 0%, rgba(212, 193, 199, 0.8) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 20vh;
+            color: var(--preto);
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero-title span {
+            color: var(--cinza-medio);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--cinza-medio);
+        }
+
+        .btn-hero-cta {
+            background-color: var(--cinza-medio);
+            color: var(--branco);
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: var(--border-radius-xl);
+            font-weight: 600;
+            border: 2px solid var(--cinza-medio);
+            transition: all var(--transition-normal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-hero-cta:hover {
+            background-color: var(--preto);
+            border-color: var(--preto);
+            transform: translateY(-3px);
+        }
+
+        /* ===== HERO STATS ===== */
+        .hero-stats {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(252, 251, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--cinza-claro);
+            padding: 30px 0;
+            z-index: 2;
+        }
+
+        .stat-box {
+            text-align: center;
+            color: var(--preto);
+            padding: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--cinza-medio);
+        }
+
+        .stat-number small {
+            font-size: 1.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--cinza-medio);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            display: inline-block;
+            color: var(--cinza-medio);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background-color: var(--cinza-medio);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--preto);
+        }
+
+        .section-title span {
+            color: var(--cinza-medio);
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--cinza-medio);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== SOBRE SECTION COM LOGO DE IMAGEM ===== */
+        .section-sobre {
+            padding: 100px 0;
+            background-color: var(--cinza-claro);
+        }
+
+        .sobre-logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sobre-logo {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sobre-logo-img {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sobre-logo-img img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .sobre-logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sobre-logo-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem;
+            color: var(--preto);
+            margin-bottom: 5px;
+            letter-spacing: -1px;
+        }
+
+        .sobre-logo-text span {
+            color: var(--cinza-medio);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .sobre-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .sobre-feature i {
+            color: var(--cinza-medio);
+            font-size: 2rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .sobre-feature h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--preto);
+        }
+
+        .sobre-feature p {
+            color: var(--cinza-medio);
+            margin-bottom: 0;
+        }
+
+        /* ===== BLINDAGEM SECTION ===== */
+        .section-blindagem {
+            padding: 100px 0;
+            background-color: var(--branco);
+        }
+
+        .blindagem-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            color: var(--cinza-medio);
+        }
+
+        .blindagem-interativa {
+            background-color: var(--cinza-claro);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .blindagem-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .blindagem-btn {
+            background-color: var(--branco);
+            border: 2px solid var(--cinza-medio);
+            color: var(--preto);
+            padding: 12px 24px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .blindagem-btn.active {
+            background-color: var(--blindagem-nivel1);
+            border-color: var(--blindagem-nivel1);
+            color: var(--branco);
+        }
+
+        .blindagem-btn[data-nivel="2"].active {
+            background-color: var(--blindagem-nivel2);
+            border-color: var(--blindagem-nivel2);
+            color: var(--preto);
+        }
+
+        .blindagem-btn[data-nivel="3"].active {
+            background-color: var(--blindagem-nivel3);
+            border-color: var(--blindagem-nivel3);
+            color: var(--branco);
+        }
+
+        .blindagem-btn[data-nivel="4"].active {
+            background-color: var(--blindagem-nivel4);
+            border-color: var(--blindagem-nivel4);
+            color: var(--branco);
+        }
+
+        .blindagem-visualizacao {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carro-blindagem {
+            width: 300px;
+            height: 150px;
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+
+        .blindagem-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            pointer-events: none;
+        }
+
+        .blindagem-layer.active {
+            opacity: 0.7;
+        }
+
+        .blindagem-info {
+            background-color: rgba(149, 120, 142, 0.1);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--cinza-medio);
+        }
+
+        .blindagem-info h4 {
+            color: var(--preto);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .blindagem-info p {
+            color: var(--cinza-medio);
+        }
+
+        .blindagem-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--cinza-medio);
+        }
+
+        .blindagem-info li i {
+            color: var(--cinza-medio);
+            margin-right: 10px;
+        }
+
+        .blindagem-tabela {
+            margin-top: 50px;
+            overflow-x: auto;
+        }
+
+        .tabela-blindagem {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+        }
+
+        .tabela-blindagem thead {
+            background-color: var(--cinza-medio);
+            color: var(--branco);
+        }
+
+        .tabela-blindagem th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .tabela-blindagem tbody tr {
+            border-bottom: 1px solid rgba(59, 59, 57, 0.05);
+            transition: all var(--transition-fast);
+            background-color: var(--cinza-claro);
+        }
+
+        .tabela-blindagem tbody tr:hover {
+            background-color: rgba(149, 120, 142, 0.1);
+        }
+
+        .tabela-blindagem td {
+            padding: 15px 20px;
+            color: var(--cinza-medio);
+        }
+
+        .nivel-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nivel-1 {
+            background-color: var(--blindagem-nivel1);
+            color: var(--branco);
+        }
+
+        .nivel-2 {
+            background-color: var(--blindagem-nivel2);
+            color: var(--preto);
+        }
+
+        .nivel-3 {
+            background-color: var(--blindagem-nivel3);
+            color: var(--branco);
+        }
+
+        .nivel-4 {
+            background-color: var(--blindagem-nivel4);
+            color: var(--branco);
+        }
+
+        /* ===== ESTOQUE SECTION ===== */
+        .section-estoque {
+            padding: 100px 0;
+            background-color: var(--cinza-claro);
+        }
+
+        .filters-container {
+            background-color: var(--branco);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--preto);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .filter-select {
+            border: 2px solid var(--cinza-medio);
+            border-radius: var(--border-radius-sm);
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            color: var(--preto);
+            background-color: var(--branco);
+            width: 100%;
+        }
+
+        .filter-select:focus {
+            border-color: var(--preto);
+            box-shadow: 0 0 0 3px rgba(59, 59, 57, 0.1);
+            outline: none;
+        }
+
+        /* CARDS DE VEÍCULOS OTIMIZADOS */
+        .veiculo-card {
+            background-color: var(--branco);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            height: 100%;
+            position: relative;
+            border: 1px solid rgba(149, 120, 142, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .veiculo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(149, 120, 142, 0.15);
+            border-color: var(--cinza-medio);
+        }
+
+        .veiculo-header {
+            position: relative;
+            padding: 15px 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .veiculo-marca {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--cinza-medio);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .veiculo-badge-container {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .veiculo-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .veiculo-badge.novo {
+            background-color: var(--cinza-medio);
+            color: var(--branco);
+        }
+
+        .veiculo-badge.seminovo {
+            background-color: var(--preto);
+            color: var(--branco);
+        }
+
+        .veiculo-badge.blindado {
+            background-color: var(--preto);
+            color: var(--branco);
+        }
+
+        .veiculo-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--cinza-claro);
+        }
+
+        .veiculo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .veiculo-card:hover .veiculo-image img {
+            transform: scale(1.08);
+        }
+
+        .veiculo-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .veiculo-modelo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--preto);
+            margin-bottom: 10px;
+            line-height: 1.3;
+            height: 2.6em;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .veiculo-preco {
+            color: var(--cinza-medio);
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .veiculo-preco small {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--cinza-medio);
+            display: block;
+            margin-top: 3px;
+        }
+
+        .veiculo-especificacoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .espec-chip {
+            background-color: rgba(149, 120, 142, 0.15);
+            border: 1px solid rgba(149, 120, 142, 0.3);
+            border-radius: 15px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--cinza-medio);
+            transition: all var(--transition-fast);
+        }
+
+        .veiculo-card:hover .espec-chip {
+            background-color: rgba(149, 120, 142, 0.1);
+            border-color: rgba(149, 120, 142, 0.3);
+        }
+
+        .espec-chip i {
+            color: var(--cinza-medio);
+            font-size: 0.7rem;
+            width: 12px;
+            text-align: center;
+        }
+
+        .veiculo-info-adicional {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--cinza-medio);
+            margin-bottom: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(59, 59, 57, 0.05);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-item i {
+            color: var(--cinza-medio);
+            font-size: 0.8rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+            display: inline-block;
+        }
+
+        .status-disponivel {
+            background-color: var(--cinza-medio);
+        }
+
+        .status-reservado {
+            background-color: var(--preto);
+        }
+
+        .veiculo-card.blindado-destaque {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .veiculo-card.blindado-destaque::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cinza-medio), var(--preto));
+            z-index: 2;
+        }
+
+        .veiculo-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .btn-detalhes {
+            flex: 1;
+            background-color: transparent;
+            border: 1.5px solid var(--preto);
+            color: var(--preto);
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            gap: 6px;
+        }
+
+        .btn-detalhes:hover {
+            background-color: var(--preto);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp-card {
+            flex: 1;
+            background-color: var(--cinza-medio);
+            color: var(--branco);
+            border: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            gap: 6px;
+        }
+
+        .btn-whatsapp-card:hover {
+            background-color: var(--preto);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+
+        /* ===== SERVIÇOS SECTION ===== */
+        .section-servicos {
+            padding: 100px 0;
+            background-color: var(--branco);
+        }
+
+        .service-card {
+            background-color: var(--cinza-claro);
+            padding: 40px 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            height: 100%;
+            transition: all var(--transition-normal);
+            border: 1px solid var(--cinza-medio);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-card:hover {
+            border-color: var(--preto);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(149, 120, 142, 0.1);
+            color: var(--cinza-medio);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 25px;
+            transition: all var(--transition-normal);
+        }
+
+        .service-card:hover .service-icon {
+            background-color: var(--cinza-medio);
+            color: var(--branco);
+            transform: rotateY(180deg);
+        }
+
+        .service-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--preto);
+        }
+
+        .service-card p {
+            color: var(--cinza-medio);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .service-link {
+            color: var(--cinza-medio);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--transition-fast);
+        }
+
+        .service-link:hover {
+            gap: 10px;
+            color: var(--preto);
+        }
+
+        /* ===== CONTATO SECTION ===== */
+        .section-contato {
+            padding: 100px 0;
+            background-color: var(--cinza-claro);
+        }
+
+        .contato-info {
+            margin-bottom: 40px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item i {
+            color: var(--cinza-medio);
+            font-size: 1.5rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .info-item h5 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--preto);
+        }
+
+        .info-item p {
+            color: var(--cinza-medio);
+            margin-bottom: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
+            background-color: var(--branco);
+            color: var(--preto);
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            font-size: 1.2rem;
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            background-color: var(--cinza-medio);
+            border-color: var(--cinza-medio);
+            color: var(--branco);
+        }
+
+        .contato-form {
+            background-color: var(--branco);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--cinza-medio);
+        }
+
+        .contato-form h4 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--preto);
+            text-align: center;
+        }
+
+        .form-control {
+            border: 2px solid var(--cinza-medio);
+            border-radius: var(--border-radius-sm);
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            color: var(--preto);
+            background-color: var(--branco);
+            margin-bottom: 20px;
+        }
+
+        .form-control:focus {
+            border-color: var(--preto);
+            box-shadow: 0 0 0 3px rgba(59, 59, 57, 0.1);
+            outline: none;
+        }
+
+        .btn-submit {
+            background-color: var(--cinza-medio);
+            border-color: var(--cinza-medio);
+            color: var(--branco);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: var(--border-radius-md);
+            transition: all var(--transition-normal);
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--preto);
+            border-color: var(--preto);
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--branco);
+            color: var(--cinza-medio);
+            padding: 80px 0 30px;
+            border-top: 2px solid var(--cinza-claro);
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .footer-logo h3 {
+            font-size: 2.5rem;
+            color: var(--preto);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .footer-logo span {
+            color: var(--cinza-medio);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .footer-about {
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--cinza-medio);
+        }
+
+        .footer-title {
+            color: var(--preto);
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--cinza-medio);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--preto);
+            padding-left: 5px;
+        }
+
+        .footer-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--cinza-medio);
+        }
+
+        .footer-info i {
+            color: var(--cinza-medio);
+            margin-top: 3px;
+            min-width: 20px;
+        }
+
+        .footer-divider {
+            border-color: var(--cinza-medio);
+            margin: 50px 0 30px;
+            opacity: 0.3;
+        }
+
+        .footer-copyright {
+            color: var(--cinza-medio);
+            font-size: 0.9rem;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ===== MODAL COMPACTO ===== */
+        .modal-dialog.modal-compact {
+            max-width: 500px;
+            margin: 1.75rem auto;
+        }
+
+        .modal-compact .modal-content {
+            background-color: var(--branco);
+            border: 1px solid var(--cinza-medio);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .modal-compact .modal-header {
+            background-color: var(--cinza-claro);
+            border-bottom: 1px solid rgba(149, 120, 142, 0.3);
+            padding: 15px 20px;
+        }
+
+        .modal-compact .modal-body {
+            padding: 0;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-compact .carousel-item img {
+            height: 250px !important;
+            object-fit: cover;
+        }
+
+        .modal-compact .veiculo-detalhes-content {
+            padding: 20px;
+        }
+
+        .modal-compact .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-compact .modal-body::-webkit-scrollbar-track {
+            background: var(--cinza-claro);
+        }
+
+        .modal-compact .modal-body::-webkit-scrollbar-thumb {
+            background-color: var(--cinza-medio);
+            border-radius: 4px;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 1199px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .veiculo-image {
+                height: 170px;
+            }
+            .veiculo-modelo {
+                font-size: 1.05rem;
+            }
+            .veiculo-preco {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .carro-blindagem {
+                width: 250px;
+                height: 125px;
+            }
+            .veiculo-card {
+                max-width: 350px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .veiculo-image {
+                height: 160px;
+            }
+            .sobre-logo-text h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .hero-stats {
+                position: relative;
+                margin-top: 30px;
+                background-color: var(--branco);
+            }
+            .stat-box {
+                margin-bottom: 20px;
+            }
+            .blindagem-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            .blindagem-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            .veiculo-image {
+                height: 180px;
+            }
+            .veiculo-modelo {
+                font-size: 1.1rem;
+            }
+            .sobre-logo-text h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .hero {
+                min-height: 600px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .blindagem-interativa {
+                padding: 25px;
+            }
+            .footer {
+                padding: 60px 0 20px;
+            }
+            .veiculo-image {
+                height: 160px;
+            }
+            .veiculo-modelo {
+                font-size: 1rem;
+                height: 2.4em;
+            }
+            .veiculo-especificacoes {
+                gap: 6px;
+            }
+            .espec-chip {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            .sobre-logo-text h2 {
+                font-size: 2rem;
+            }
+            
+            /* Ajustes para logo no mobile */
+            .logo-img-container {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .sobre-logo-img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .modal-compact .carousel-item img {
+                height: 180px !important;
+            }
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes cardEntrada {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .veiculo-card[data-aos] {
+            animation: cardEntrada 0.6s ease-out;
+        }
+        
+        /* Ajustes para orientação paisagem */
+        @media (max-height: 576px) and (orientation: landscape) {
+            .hero {
+                min-height: 500px;
+            }
+            .veiculo-image {
+                height: 120px !important;
+            }
+            .modal-compact .carousel-item img {
+                height: 150px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <h1>PERA</h1>
+                <span>VEÍCULOS</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5511947469080" class="whatsapp-float" target="_blank" title="Falar no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">Fale Conosco</span>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="logo-container">
+                    <div class="logo-img-container">
+                       <img src="Gemini_Generated_Image_j6i9q7j6i9q7j6i9.png" alt="PERA Veículos Logo">
+                    </div>
+                    <div class="logo-text">
+                        <span class="main">PERA VEÍCULOS</span>
+                        <span class="subtitle">VEÍCULOS PREMIUM</span>
+                    </div>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blindagem">Blindagem</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#estoque">Estoque</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a href="https://wa.me/5511947469080" target="_blank" class="btn btn-whatsapp-nav">
+                            <i class="fab fa-whatsapp me-1"></i> WhatsApp
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+                    <div class="hero-overlay"></div>
+                    <div class="container">
+                        <div class="hero-content" data-aos="fade-up">
+                            <h1 class="hero-title">EXCELÊNCIA EM <span>VEÍCULOS PREMIUM</span></h1>
+                            <p class="hero-subtitle">24 anos de experiência no mercado automotivo, oferecendo veículos premium, blindagem e assessoria personalizada.</p>
+                            <a href="#estoque" class="btn btn-hero-cta" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-search me-2"></i> Ver Estoque
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1563720223486-7a06b0c2f8c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+                    <div class="hero-overlay"></div>
+                    <div class="container">
+                        <div class="hero-content" data-aos="fade-up">
+                            <h1 class="hero-title">BLINDAGEM DE <span>ALTA PERFORMANCE</span></h1>
+                            <p class="hero-subtitle">Soluções completas em blindagem automotiva com os mais altos padrões de segurança e qualidade.</p>
+                            <a href="#blindagem" class="btn btn-hero-cta" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-shield-alt me-2"></i> Conheça Nossas Blindagens
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+                    <div class="hero-overlay"></div>
+                    <div class="container">
+                        <div class="hero-content" data-aos="fade-up">
+                            <h1 class="hero-title">ATENDIMENTO <span>PERSONALIZADO</span></h1>
+                            <p class="hero-subtitle">Consultores especializados para encontrar o veículo perfeito para suas necessidades e estilo de vida.</p>
+                            <a href="#contato" class="btn btn-hero-cta" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-headset me-2"></i> Agendar Visita
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+        
+        <!-- Hero Stats -->
+        <div class="hero-stats">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-3 col-6">
+                        <div class="stat-box">
+                            <h3 class="stat-number" data-count="24">0</h3>
+                            <p class="stat-label">Anos de Experiência</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-box">
+                            <h3 class="stat-number" data-count="440">0<small>+</small></h3>
+                            <p class="stat-label">Veículos Vendidos</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-box">
+                            <h3 class="stat-number" data-count="100">0<small>%</small></h3>
+                            <p class="stat-label">Satisfação Cliente</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-box">
+                            <h3 class="stat-number" data-count="50">0<small>+</small></h3>
+                            <p class="stat-label">Veículos Blindados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section COM LOGO DE IMAGEM -->
+    <section id="sobre" class="section-sobre">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" data-aos="fade-up">SOBRE NÓS</span>
+                <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Pera <span>Veículos</span></h2>
+                <p class="section-description" data-aos="fade-up" data-aos-delay="200">Há 24 anos no mercado automotivo, a PERA Veículos se consolidou como referência em veículos premium, blindagem e assessoria automotiva.</p>
+            </div>
+
+            <!-- Logo da PERA Veículos na seção Sobre -->
+            <div class="sobre-logo-container" data-aos="fade-up" data-aos-delay="300">
+                <div class="sobre-logo">
+                    <div class="sobre-logo-img">
+                        <img src="Gemini_Generated_Image_j6i9q7j6i9q7j6i9" alt="PERA Veículos Logo">
+                    </div>
+                    <div class="sobre-logo-text">
+                        <h2>PERA VEÍCULOS</h2>
+                        <span>VEÍCULOS PREMIUM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="sobre-content">
+                        <p class="mb-4" style="font-size: 1.1rem; color: var(--cinza-medio);">Sua busca pelo carro perfeito começa aqui! Entendemos que escolher o carro certo é uma jornada emocionante e cheia de possibilidades. Com uma variedade impressionante de veículos, cada um com sua história e charme, nossa equipe está aqui para guiar cada passo do seu caminho.</p>
+                        
+                        <div class="sobre-feature">
+                            <i class="fas fa-car"></i>
+                            <div>
+                                <h4>Veículos Premium</h4>
+                                <p>Selecionamos cuidadosamente cada veículo para garantir qualidade, procedência e satisfação.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="sobre-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Blindagem Especializada</h4>
+                                <p>Soluções completas em blindagem automotiva com os mais altos padrões de segurança.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="sobre-feature">
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <h4>Assessoria Personalizada</h4>
+                                <p>Consultores especializados para entender suas necessidades e encontrar o veículo ideal.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="sobre-feature">
+                            <i class="fas fa-truck"></i>
+                            <div>
+                                <h4>Entrega em Todo Brasil</h4>
+                                <p>Entregamos seu veículo com segurança e agilidade em qualquer lugar do país.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Sobre a PERA Veículos" 
+                             class="img-fluid rounded"
+                             style="border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); border: 2px solid var(--cinza-medio);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blindagem Section -->
+    <section id="blindagem" class="section-blindagem">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" data-aos="fade-up">SEGURANÇA</span>
+                <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Blindagem <span>Automotiva</span></h2>
+                <p class="section-description" data-aos="fade-up" data-aos-delay="200">Proteção completa para você e sua família com os mais altos padrões de qualidade e tecnologia.</p>
+            </div>
+            
+            <div class="blindagem-intro" data-aos="fade-up">
+                <p>A blindagem automotiva é um investimento em segurança que protege contra diferentes tipos de ameaças. Cada nível de blindagem oferece proteção específica contra diferentes calibres de armas. Explore nossos níveis de proteção:</p>
+            </div>
+            
+            <!-- Sistema Interativo de Blindagem -->
+            <div class="blindagem-interativa" data-aos="fade-up">
+                <div class="blindagem-controls">
+                    <button class="blindagem-btn active" data-nivel="1">Nível 1 - Básico</button>
+                    <button class="blindagem-btn" data-nivel="2">Nível 2 - Intermediário</button>
+                    <button class="blindagem-btn" data-nivel="3">Nível 3 - Alto</button>
+                    <button class="blindagem-btn" data-nivel="4">Nível 4 - Máximo</button>
+                </div>
+                
+                <div class="blindagem-visualizacao">
+                    <div class="carro-blindagem">
+                        <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="50" y="60" width="200" height="60" rx="10" fill="#D4C1C7"/>
+                            <rect x="70" y="40" width="160" height="30" rx="8" fill="#D4C1C7"/>
+                            <circle cx="80" cy="125" r="15" fill="#95788E"/>
+                            <circle cx="220" cy="125" r="15" fill="#95788E"/>
+                        </svg>
+                        
+                        <div class="blindagem-layer" id="blindagem-layer-1" style="background-color: var(--blindagem-nivel1);"></div>
+                        <div class="blindagem-layer" id="blindagem-layer-2" style="background-color: var(--blindagem-nivel2);"></div>
+                        <div class="blindagem-layer" id="blindagem-layer-3" style="background-color: var(--blindagem-nivel3);"></div>
+                        <div class="blindagem-layer" id="blindagem-layer-4" style="background-color: var(--blindagem-nivel4);"></div>
+                    </div>
+                </div>
+                
+                <div class="blindagem-info" id="blindagem-info-1">
+                    <h4>Blindagem Nível 1 - Proteção Básica</h4>
+                    <p>Proteção contra armas de calibre menor, ideal para proteção básica em áreas urbanas.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Resistente a calibre .22 e .38</li>
+                        <li><i class="fas fa-check"></i> Espessura: 10-12mm</li>
+                        <li><i class="fas fa-check"></i> Peso adicional: 150-200kg</li>
+                        <li><i class="fas fa-check"></i> Ideal para proteção urbana</li>
+                    </ul>
+                    <p><strong>Indicação:</strong> Executivos, profissionais liberais, uso urbano.</p>
+                </div>
+                
+                <div class="blindagem-info" id="blindagem-info-2" style="display: none;">
+                    <h4>Blindagem Nível 2 - Proteção Intermediária</h4>
+                    <p>Proteção contra a maioria das armas de mão, oferecendo segurança ampliada.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Resistente a calibre 9mm e .357 Magnum</li>
+                        <li><i class="fas fa-check"></i> Espessura: 14-16mm</li>
+                        <li><i class="fas fa-check"></i> Peso adicional: 250-300kg</li>
+                        <li><i class="fas fa-check"></i> Proteção contra armas comuns</li>
+                    </ul>
+                    <p><strong>Indicação:</strong> Empresários, políticos, alta gerência.</p>
+                </div>
+                
+                <div class="blindagem-info" id="blindagem-info-3" style="display: none;">
+                    <h4>Blindagem Nível 3 - Proteção Alta</h4>
+                    <p>Proteção contra armas de maior potência, incluindo rifles.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Resistente a calibre 7.62mm e .44 Magnum</li>
+                        <li><i class="fas fa-check"></i> Espessura: 18-20mm</li>
+                        <li><i class="fas fa-check"></i> Peso adicional: 350-400kg</li>
+                        <li><i class="fas fa-check"></i> Proteção contra rifles</li>
+                    </ul>
+                    <p><strong>Indicação:</strong> Autoridades, executivos de alto risco, transporte de valores.</p>
+                </div>
+                
+                <div class="blindagem-info" id="blindagem-info-4" style="display: none;">
+                    <h4>Blindagem Nível 4 - Proteção Máxima</h4>
+                    <p>Proteção máxima contra armas de alto poder, incluindo fuzis de assalto.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Resistente a calibre 5.56mm e 7.62mm (fuzis)</li>
+                        <li><i class="fas fa-check"></i> Espessura: 25-30mm</li>
+                        <li><i class="fas fa-check"></i> Peso adicional: 500-600kg</li>
+                        <li><i class="fas fa-check"></i> Proteção máxima balística</li>
+                    </ul>
+                    <p><strong>Indicação:</strong> Chefes de estado, diplomatas, situações de extremo risco.</p>
+                </div>
+            </div>
+            
+            <!-- Tabela Comparativa de Blindagem -->
+            <div class="blindagem-tabela" data-aos="fade-up">
+                <h3 class="text-center mb-4" style="color: var(--preto);">Comparativo de Níveis de Blindagem</h3>
+                <table class="tabela-blindagem">
+                    <thead>
+                        <tr>
+                            <th>Nível</th>
+                            <th>Calibres Resistentes</th>
+                            <th>Espessura</th>
+                            <th>Peso Adicional</th>
+                            <th>Aplicação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="nivel-badge nivel-1">Nível 1</span></td>
+                            <td>.22, .38</td>
+                            <td>10-12mm</td>
+                            <td>150-200kg</td>
+                            <td>Proteção urbana básica</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nivel-badge nivel-2">Nível 2</span></td>
+                            <td>9mm, .357 Magnum</td>
+                            <td>14-16mm</td>
+                            <td>250-300kg</td>
+                            <td>Proteção intermediária</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nivel-badge nivel-3">Nível 3</span></td>
+                            <td>7.62mm, .44 Magnum</td>
+                            <td>18-20mm</td>
+                            <td>350-400kg</td>
+                            <td>Alta proteção</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nivel-badge nivel-4">Nível 4</span></td>
+                            <td>5.56mm, 7.62mm (fuzil)</td>
+                            <td>25-30mm</td>
+                            <td>500-600kg</td>
+                            <td>Proteção máxima</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estoque Section -->
+    <section id="estoque" class="section-estoque">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" data-aos="fade-up">ESTOQUE</span>
+                <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Veículos <span>Disponíveis</span></h2>
+                <p class="section-description" data-aos="fade-up" data-aos-delay="200">Conheça nossa seleção exclusiva de veículos premium, novos e seminovos, com garantia de procedência.</p>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters-container" data-aos="fade-up">
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="filter-group">
+                            <label><i class="fas fa-car me-2"></i> Marca</label>
+                            <select class="form-select filter-select" id="filterMarca">
+                                <option value="all">Todas as Marcas</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Mercedes">Mercedes-Benz</option>
+                                <option value="Porsche">Porsche</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Volkswagen">Volkswagen</option>
+                                <option value="Audi">Audi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="filter-group">
+                            <label><i class="fas fa-tag me-2"></i> Categoria</label>
+                            <select class="form-select filter-select" id="filterCategoria">
+                                <option value="all">Todas as Categorias</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="Esportivo">Esportivo</option>
+                                <option value="Picape">Picape</option>
+                                <option value="Hatch">Hatch</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="filter-group">
+                            <label><i class="fas fa-calendar me-2"></i> Ano</label>
+                            <select class="form-select filter-select" id="filterAno">
+                                <option value="all">Todos os Anos</option>
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="filter-group">
+                            <label><i class="fas fa-filter me-2"></i> Status</label>
+                            <select class="form-select filter-select" id="filterStatus">
+                                <option value="all">Todos</option>
+                                <option value="novo">Novos</option>
+                                <option value="seminovo">Seminovos</option>
+                                <option value="blindado">Blindados</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de Veículos -->
+            <div class="row g-4 mt-4" id="veiculosGrid">
+                <!-- Veículo 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="veiculo-card blindado-destaque">
+                        <div class="veiculo-header">
+                            <div class="veiculo-marca">BMW</div>
+                            <div class="veiculo-badge-container">
+                                <span class="veiculo-badge blindado">Blindado</span>
+                                <span class="veiculo-badge novo">2024</span>
+                            </div>
+                        </div>
+                        
+                        <div class="veiculo-image">
+                            <img src="https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?auto=format&fit=crop&w=800&q=80" alt="BMW X5 M40 HÍBRIDO">
+                        </div>
+                        
+                        <div class="veiculo-content">
+                            <h3 class="veiculo-modelo">X5 M40 HÍBRIDO</h3>
+                            <div class="veiculo-preco">A consultar<small>Preço sob consulta</small></div>
+                            
+                            <div class="veiculo-especificacoes">
+                                <div class="espec-chip">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Híbrido</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Automático</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>5.000 km</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Nível III</span>
+                                </div>
+                            </div>
+                            
+                            <div class="veiculo-info-adicional">
+                                <div class="info-item">
+                                    <i class="fas fa-horse-head"></i>
+                                    <span>530 cv</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="status-indicator status-disponivel"></span>
+                                    <span>Disponível</span>
+                                </div>
+                            </div>
+                            
+                            <div class="veiculo-actions">
+                                <a href="#" class="btn-detalhes" onclick="abrirModalVeiculo(1); return false;">
+                                    <i class="fas fa-eye"></i>
+                                    Detalhes
+                                </a>
+                                <a href="https://wa.me/5511947469080?text=Olá! Tenho interesse no BMW X5 M40 HÍBRIDO - BLINDADO." 
+                                   class="btn-whatsapp-card" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Veículo 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="veiculo-card blindado-destaque">
+                        <div class="veiculo-header">
+                            <div class="veiculo-marca">PORSCHE</div>
+                            <div class="veiculo-badge-container">
+                                <span class="veiculo-badge blindado">Blindado</span>
+                                <span class="veiculo-badge seminovo">2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="veiculo-image">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Porsche Cayenne V6">
+                        </div>
+                        
+                        <div class="veiculo-content">
+                            <h3 class="veiculo-modelo">Cayenne V6 BSS</h3>
+                            <div class="veiculo-preco">A consultar<small>Preço sob consulta</small></div>
+                            
+                            <div class="veiculo-especificacoes">
+                                <div class="espec-chip">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Gasolina</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Automático</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>12.000 km</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>BSS III+</span>
+                                </div>
+                            </div>
+                            
+                            <div class="veiculo-info-adicional">
+                                <div class="info-item">
+                                    <i class="fas fa-horse-head"></i>
+                                    <span>440 cv</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-car"></i>
+                                    <span>SUV</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="status-indicator status-disponivel"></span>
+                                    <span>Disponível</span>
+                                </div>
+                            </div>
+                            
+                            <div class="veiculo-actions">
+                                <a href="#" class="btn-detalhes" onclick="abrirModalVeiculo(2); return false;">
+                                    <i class="fas fa-eye"></i>
+                                    Detalhes
+                                </a>
+                                <a href="https://wa.me/5511947469080?text=Olá! Tenho interesse no Porsche Cayenne V6 Blindada BSS." 
+                                   class="btn-whatsapp-card" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Veículo 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="veiculo-card">
+                        <div class="veiculo-header">
+                            <div class="veiculo-marca">MERCEDES-BENZ</div>
+                            <div class="veiculo-badge-container">
+                                <span class="veiculo-badge seminovo">Seminovo</span>
+                                <span class="veiculo-badge seminovo">2020</span>
+                            </div>
+                        </div>
+                        
+                        <div class="veiculo-image">
+                            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" alt="Mercedes-Benz A250">
+                        </div>
+                        
+                        <div class="veiculo-content">
+                            <h3 class="veiculo-modelo">A250 Visión</h3>
+                            <div class="veiculo-preco">R$ 174.800<small>À vista</small></div>
+                            
+                            <div class="veiculo-especificacoes">
+                                <div class="espec-chip">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Gasolina</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Automático</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>74.000 km</span>
+                                </div>
+                                <div class="espec-chip">
+                                    <i class="fas fa-star"></i>
+                                    <span>AMG Line</span>
+                                </div>
+                            </div>
+                            
+                            <div class="veiculo-info-adicional">
+                                <div class="info-item">
+                                    <i class="fas fa-horse-head"></i>
+                                    <span>224 cv</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-car"></i>
+                                    <span>Hatch</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="status-indicator status-disponivel"></span>
+                                    <span>Disponível</span>
+                                </div>
+                            </div>
+                            
+                            <div class="veiculo-actions">
+                                <a href="#" class="btn-detalhes" onclick="abrirModalVeiculo(3); return false;">
+                                    <i class="fas fa-eye"></i>
+                                    Detalhes
+                                </a>
+                                <a href="https://wa.me/5511947469080?text=Olá! Tenho interesse no Mercedes-Benz A250 Visión por R$ 174.800,00." 
+                                   class="btn-whatsapp-card" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão Ver Mais -->
+            <div class="text-center mt-5" data-aos="fade-up">
+                <button class="btn" id="loadMoreBtn" style="border: 2px solid var(--cinza-medio); color: var(--cinza-medio); background-color: transparent;">
+                    <i class="fas fa-plus me-2"></i> Carregar Mais Veículos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Section -->
+    <section id="servicos" class="section-servicos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" data-aos="fade-up">SERVIÇOS</span>
+                <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Soluções <span>Completas</span></h2>
+                <p class="section-description" data-aos="fade-up" data-aos-delay="200">Oferecemos uma experiência completa de compra, blindagem e pós-venda para você.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-search-dollar"></i>
+                        </div>
+                        <h4>Avaliação de Veículo</h4>
+                        <p>Avaliamos seu veículo atual com transparência e preço justo para facilitar sua troca.</p>
+                        <a href="#contato" class="service-link">Solicitar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Blindagem</h4>
+                        <p>Soluções completas em blindagem automotiva com os mais altos padrões de segurança.</p>
+                        <a href="#blindagem" class="service-link">Conhecer <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>Assessoria</h4>
+                        <p>Consultoria especializada para encontrar o veículo ideal para suas necessidades.</p>
+                        <a href="#contato" class="service-link">Agendar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Pós-Venda</h4>
+                        <p>Manutenção especializada, peças originais e suporte completo após a compra.</p>
+                        <a href="#contato" class="service-link">Contatar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="section-contato">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" data-aos="fade-up">CONTATO</span>
+                <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Fale <span>Conosco</span></h2>
+                <p class="section-description" data-aos="fade-up" data-aos-delay="200">Entre em contato para agendar uma visita, solicitar informações ou uma avaliação do seu veículo.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="contato-info">
+                        <h3 class="mb-4" style="color: var(--preto);">Informações de Contato</h3>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h5>Endereço</h5>
+                                <p>Av. Eng° Luis Carlos Berrini, 105 - CJ 809<br>Brooklin - São Paulo/SP</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h5>Horário de Atendimento</h5>
+                                <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 13h<br>Atendimento somente com hora marcada</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h5>Telefone / WhatsApp</h5>
+                                <p>(11) 94746-9080</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h5>E-mail</h5>
+                                <p>contato@peraveiculos.com.br</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link facebook" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link linkedin" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://wa.me/5511947469080" class="social-link whatsapp" title="WhatsApp" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="contato-form">
+                        <h4>Envie sua Mensagem</h4>
+                        <form id="formContato">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" id="email" placeholder="Seu e-mail" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <input type="tel" class="form-control" id="telefone" placeholder="Seu telefone" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <select class="form-control" id="assunto" required>
+                                            <option value="" disabled selected>Assunto</option>
+                                            <option value="orcamento">Orçamento de veículo</option>
+                                            <option value="blindagem">Informações sobre blindagem</option>
+                                            <option value="avaliacao">Avaliação de veículo</option>
+                                            <option value="agendamento">Agendamento de visita</option>
+                                            <option value="outro">Outro assunto</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <textarea class="form-control" id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane me-2"></i> Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-logo">
+                        <h3>PERA VEÍCULOS</h3>
+                        <span>VEÍCULOS PREMIUM</span>
+                    </div>
+                    <p class="footer-about">Há 24 anos no mercado automotivo, oferecendo veículos premium, blindagem e assessoria personalizada com excelência e transparência.</p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Links Rápidos</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#blindagem">Blindagem</a></li>
+                        <li><a href="#estoque">Estoque</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Horário de Atendimento</h5>
+                    <ul class="footer-info">
+                        <li><i class="far fa-clock"></i> Segunda a Sexta: 9h às 18h</li>
+                        <li><i class="far fa-clock"></i> Sábado: 9h às 13h</li>
+                        <li><i class="fas fa-phone-alt"></i> (11) 94746-9080</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Eng° Luis Carlos Berrini, 105 - CJ 809 - Brooklin - SP</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Newsletter</h5>
+                    <p class="footer-newsletter">Receba nossas ofertas exclusivas e novidades em primeira mão.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Seu e-mail" required style="background-color: var(--cinza-claro); border-color: var(--cinza-medio); color: var(--preto);">
+                            <button class="btn" type="submit" style="background-color: var(--cinza-medio); color: var(--branco); border-color: var(--cinza-medio);">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="footer-copyright">&copy; 2024 PERA Veículos. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-link me-3" style="color: var(--cinza-medio);">Política de Privacidade</a>
+                    <a href="#" class="footer-link" style="color: var(--cinza-medio);">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- JS Principal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+
+            // Inicializar Swiper do Hero
+            const heroSwiper = new Swiper('.hero-swiper', {
+                loop: true,
+                speed: 800,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                }
+            });
+
+            // Esconder Loader
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('loaded');
+            }, 2000);
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Animar estatísticas
+            function animarEstatisticas() {
+                const statNumbers = document.querySelectorAll('.stat-number');
+                
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-count'));
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        
+                        stat.textContent = Math.floor(current);
+                        
+                        if (stat.querySelector('small')) {
+                            stat.innerHTML = Math.floor(current) + '<small>' + stat.querySelector('small').textContent + '</small>';
+                        }
+                    }, 16);
+                });
+            }
+
+            // Observar quando a seção de estatísticas estiver visível
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animarEstatisticas();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const statsSection = document.querySelector('.hero-stats');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+
+            // Sistema Interativo de Blindagem
+            const blindagemBtns = document.querySelectorAll('.blindagem-btn');
+            const blindagemLayers = document.querySelectorAll('.blindagem-layer');
+            const blindagemInfos = document.querySelectorAll('.blindagem-info');
+            
+            blindagemBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    blindagemBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const nivel = this.getAttribute('data-nivel');
+                    
+                    blindagemLayers.forEach(layer => layer.classList.remove('active'));
+                    document.getElementById(`blindagem-layer-${nivel}`).classList.add('active');
+                    
+                    blindagemInfos.forEach(info => info.style.display = 'none');
+                    document.getElementById(`blindagem-info-${nivel}`).style.display = 'block';
+                });
+            });
+
+            // Botão "Carregar Mais Veículos"
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Carregando...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check me-2"></i> Todos os veículos carregados';
+                    this.disabled = true;
+                    this.style.opacity = '0.5';
+                }, 1500);
+            });
+
+            // Formulário de contato
+            const formContato = document.getElementById('formContato');
+            if (formContato) {
+                formContato.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.innerHTML;
+                    
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Enviando...';
+                    button.disabled = true;
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-check me-2"></i> Mensagem Enviada!';
+                        button.style.backgroundColor = '#3B3B39';
+                        
+                        setTimeout(() => {
+                            this.reset();
+                            button.innerHTML = originalText;
+                            button.style.backgroundColor = '';
+                            button.disabled = false;
+                        }, 2000);
+                    }, 1500);
+                });
+            }
+
+            // Smooth scroll para links internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Dados dos veículos
+        const veiculosData = {
+            1: {
+                marca: "BMW",
+                modelo: "X5 M40 HÍBRIDO - BLINDADO",
+                preco: "A consultar",
+                status: "blindado",
+                descricao: "SUV de luxo BMW X5 M40i blindado, com motor híbrido de alta performance. Veículo em excelente estado, com blindagem nível III certificada.",
+                ano: 2024,
+                km: "5.000 km",
+                combustivel: "Híbrido",
+                cambio: "Automático",
+                cor: "Azul Marina Metálico",
+                portas: 4,
+                potencia: "530 cv",
+                motor: "3.0 TwinPower Turbo + Elétrico",
+                caracteristicas: [
+                    "Blindagem Nível III certificada",
+                    "Sistema híbrido plug-in",
+                    "Pacote M Sport completo",
+                    "Teto solar panorâmico",
+                    "Assistente de direção ativa",
+                    "Sistema de som Harman Kardon",
+                    "Rodas 22\" originais BMW",
+                    "Banco de couro Merino",
+                    "Head-up display",
+                    "Porta-malas automático"
+                ],
+                equipamentos: [
+                    "Sistema de som premium",
+                    "Navegação com realidade aumentada",
+                    "Assistente de estacionamento 360°",
+                    "Controle de cruzeiro adaptativo",
+                    "Faróis laser adaptativos",
+                    "Vidros e retrovisores escurecidos",
+                    "Carregador wireless",
+                    "4 zonas de clima",
+                    "Vidros laminados de segurança",
+                    "Kit de emergência"
+                ],
+                imagens: [
+                    "https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1542361345-89e58247f2d5?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            2: {
+                marca: "Porsche",
+                modelo: "Cayenne V6 Blindada BSS",
+                preco: "A consultar",
+                status: "blindado",
+                descricao: "Porsche Cayenne V6 com blindagem BSS (Blindagem de Segurança e Sobrevivência). Veículo em estado impecável, com certificação internacional de blindagem.",
+                ano: 2023,
+                km: "12.000 km",
+                combustivel: "Gasolina",
+                cambio: "Automático PDK",
+                cor: "Preto Carrera Metálico",
+                portas: 4,
+                potencia: "440 cv",
+                motor: "3.0 V6 Turbo",
+                caracteristicas: [
+                    "Blindagem BSS Nível III+",
+                    "Certificação internacional",
+                    "Sistema de suspensão a ar",
+                    "Pacote Chrono Sport",
+                    "Rodas 21\" RS Spyder Design",
+                    "Interior em couro full",
+                    "Sistema PCM com navegação",
+                    "Bancos esportivos 18-way",
+                    "Teto solar panorâmico",
+                    "Escapamento esportivo"
+                ],
+                equipamentos: [
+                    "Assistente de direção ativa",
+                    "Controle de cruzeiro adaptativo",
+                    "Sistema de som Bose",
+                    "Faróis LED Matrix",
+                    "Head-up display",
+                    "ParkAssist com câmera 360°",
+                    "Aquecimento de bancos dianteiros",
+                    "Ventilação de bancos dianteiros",
+                    "Carregador wireless",
+                    "Porta-copos refrigerado"
+                ],
+                imagens: [
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1563720223486-7a06b0c2f8c8?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            3: {
+                marca: "Mercedes-Benz",
+                modelo: "A250 Visión",
+                preco: "R$ 174.800,00",
+                status: "seminovo",
+                descricao: "Mercedes-Benz A250 Visión em excelente estado, único dono, com histórico de manutenção completo na concessionária. Veículo equipado com pacote AMG Line.",
+                ano: 2020,
+                km: "74.000 km",
+                combustivel: "Gasolina",
+                cambio: "Automático 7G-DCT",
+                cor: "Branco Polar",
+                portas: 4,
+                potencia: "224 cv",
+                motor: "2.0 Turbo",
+                caracteristicas: [
+                    "Pacote AMG Line completo",
+                    "Rodas 18\" AMG multiraios",
+                    "Suspensão esportiva AMG",
+                    "Faróis Multibeam LED",
+                    "MBUX com tela dupla 10,25\"",
+                    "Assistente de voz 'Hey Mercedes'",
+                    "Bancos esportivos em couro",
+                    "Câmbio paddle shift",
+                    "Teto solar panorâmico",
+                    "Sistema Keyless-Go"
+                ],
+                equipamentos: [
+                    "Assistente de direção ativa",
+                    "Controle de cruzeiro adaptativo",
+                    "Parking Package com 360°",
+                    "Sistema de som Burmester",
+                    "Aquecimento de bancos dianteiros",
+                    "Climatizador bizona",
+                    "Carregador wireless",
+                    "Porta-malas automático",
+                    "Retrovisores com memória",
+                    "Piloto automático ativo"
+                ],
+                imagens: [
+                    "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80"
+                ]
+            }
+        };
+
+        // Função para abrir modal de veículo (VERSÃO COMPACTA)
+        function abrirModalVeiculo(id) {
+            const veiculo = veiculosData[id];
+            if (!veiculo) return;
+
+            // Criar modal
+            const modalHTML = `
+                <div class="modal fade" id="modalVeiculo${id}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-compact">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div>
+                                    <h5 class="modal-title mb-0" style="color: var(--preto); font-weight: 700;">${veiculo.marca} ${veiculo.modelo}</h5>
+                                    <small style="color: var(--cinza-medio); font-size: 0.8rem;">Cód: ${id}2024</small>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div id="carousel${id}" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        ${veiculo.imagens.map((_, index) => `
+                                            <button type="button" data-bs-target="#carousel${id}" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}"></button>
+                                        `).join('')}
+                                    </div>
+                                    <div class="carousel-inner">
+                                        ${veiculo.imagens.map((img, index) => `
+                                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                                <img src="${img}" class="d-block w-100" alt="${veiculo.marca} ${veiculo.modelo}">
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel${id}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel${id}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+
+                                <div class="veiculo-detalhes-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 style="color: var(--cinza-medio); font-weight: 800; margin: 0;">${veiculo.preco}</h4>
+                                        <span class="badge" style="background-color: var(--cinza-medio); color: var(--branco);">${veiculo.km}</span>
+                                    </div>
+
+                                    <p style="color: var(--cinza-medio); font-size: 0.9rem; border-bottom: 1px solid rgba(59,59,57,0.1); padding-bottom: 15px;">
+                                        ${veiculo.descricao}
+                                    </p>
+
+                                    <div class="row g-2 mb-3" style="font-size: 0.85rem;">
+                                        <div class="col-6"><i class="fas fa-calendar me-2" style="color: var(--cinza-medio);"></i> ${veiculo.ano}</div>
+                                        <div class="col-6"><i class="fas fa-gas-pump me-2" style="color: var(--cinza-medio);"></i> ${veiculo.combustivel}</div>
+                                        <div class="col-6"><i class="fas fa-cogs me-2" style="color: var(--cinza-medio);"></i> ${veiculo.cambio}</div>
+                                        <div class="col-6"><i class="fas fa-horse-head me-2" style="color: var(--cinza-medio);"></i> ${veiculo.potencia}</div>
+                                    </div>
+
+                                    <div class="accordion accordion-flush mb-4" id="accordionDetalhes${id}" style="background: transparent;">
+                                        <div class="accordion-item" style="background: transparent; border: 1px solid rgba(59,59,57,0.1); border-radius: 8px;">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne${id}" style="background: rgba(59,59,57,0.05); color: var(--preto); font-size: 0.9rem; padding: 10px 15px;">
+                                                    <i class="fas fa-list me-2"></i> Ver Itens e Opcionais
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne${id}" class="accordion-collapse collapse" data-bs-parent="#accordionDetalhes${id}">
+                                                <div class="accordion-body" style="color: var(--cinza-medio); font-size: 0.85rem;">
+                                                    <ul class="list-unstyled mb-0">
+                                                        ${veiculo.caracteristicas.map(c => `<li class="mb-1"><i class="fas fa-check" style="color: var(--cinza-medio); margin-right: 10px;"></i> ${c}</li>`).join('')}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="https://wa.me/5511947469080?text=Olá! Tenho interesse no ${veiculo.marca} ${veiculo.modelo}" 
+                                       class="btn w-100" 
+                                       style="background-color: var(--cinza-medio); color: var(--branco); font-weight: 600; padding: 12px; border-radius: 50px;" 
+                                       target="_blank">
+                                        <i class="fab fa-whatsapp me-2"></i> Tenho Interesse
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Adicionar modal ao body
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById(`modalVeiculo${id}`));
+            modal.show();
+            
+            // Remover modal do DOM após fechar para não acumular
+            document.getElementById(`modalVeiculo${id}`).addEventListener('hidden.bs.modal', function () {
+                this.remove();
+            });
+        }
+    </script>
+</body>
+</html>
